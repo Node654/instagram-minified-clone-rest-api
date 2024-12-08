@@ -64,7 +64,6 @@ class RegisterTest extends TestCase
             'avatar' => null,
             'about' => Arr::get($data, 'about'),
             'isVerified' => false,
-            'registeredAt' => $response->json('registeredAt'),
         ]);
         $this->assertDatabaseHas(User::class, [
             'id' => $response->json('id'),

@@ -8,7 +8,7 @@ use App\Http\Requests\User\LoginRequest;
 
 class LoginController extends Controller
 {
-    public function __invoke(LoginRequest $request)
+    public function __invoke(LoginRequest $request): array
     {
         return User::login($request->userLoginData());
     }

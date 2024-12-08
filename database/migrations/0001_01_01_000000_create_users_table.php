@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('login')->unique();
             $table->string('avatar')->nullable();
             $table->string('about')->nullable();
-            $table->boolean('is_verified')->default(false);
+            $table->boolean('is_verified')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

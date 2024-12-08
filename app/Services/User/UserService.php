@@ -25,8 +25,10 @@ class UserService
             throw new InvalidUserCredentialsException('Invalid credentials user', 401);
         }
 
+        $token = auth()->user()->createToken('api_login');
+
         return [
-            'token' => 1
+            'token' => $token->plainTextToken
         ];
     }
 }

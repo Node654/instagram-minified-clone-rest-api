@@ -25,7 +25,7 @@ class CurrentUserResource extends JsonResource
             'publications' => $this->postsCount(),
             'avatar' => $this->avatar,
             'about' => $this->about,
-            'isVerified' => $this->is_verified ?? false,
+            'isVerified' => $this->is_verified,
             'registeredAt' => $this->created_at->format('d-m-Y H:i')
         ];
     }

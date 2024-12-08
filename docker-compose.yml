@@ -5,10 +5,10 @@ services:
             - ./:/var/www/html
             - ./docker/nginx/conf.d:/etc/nginx/conf.d
         ports:
-            - 8876:80
+            - 8879:80
         depends_on:
             - app
-        container_name: project_nginx
+        container_name: project_insta_nginx
 
     app:
         build:
@@ -18,14 +18,14 @@ services:
             - ./:/var/www/html
         depends_on:
             - db
-        container_name: project_app
+        container_name: project_insta_app
 
     db:
         image: mysql:8.0
         restart: always
         ports:
-            - 8077:3306
+            - 8079:3306
         environment:
             MYSQL_DATABASE: insta_rest_api_db
             MYSQL_ROOT_PASSWORD: root
-        container_name: project_db
+        container_name: project_insta_db

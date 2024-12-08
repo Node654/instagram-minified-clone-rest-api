@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static CurrentUserResource store(RegisterUserData $data)
- * @method static CurrentUserResource login(LoginUserData $data)
+ * @method static array login(LoginUserData $data)
  *
  * @see UserService
  */
