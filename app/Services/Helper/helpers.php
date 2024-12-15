@@ -8,3 +8,4 @@ function responseFailed(?string $message = null, int $code = 400): JsonResponse
         'message' => __($message) ?? __('Bad request'),
     ], $code);
 }
+

@@ -7,6 +7,10 @@ use App\Http\Resources\User\CurrentUserResource;
 use App\Models\User;
 use App\Services\User\Data\LoginUserData;
 use App\Services\User\Data\RegisterUserData;
+use App\Services\User\Data\UserAvatarData;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class UserService
 {
@@ -30,5 +34,15 @@ class UserService
         return [
             'token' => $token->plainTextToken
         ];
+    }
+
+    public function updateAvatar(UploadedFile $image): User
+    {
+        $path = $image->storePublicly('avatars');
+        $url = config('app.url') . '/storage/' . $path;
+        auth()->user()->update([
+            'avatar' => $url
+        ]);
+        return auth()->user();
     }
 }

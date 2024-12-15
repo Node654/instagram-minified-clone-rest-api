@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('user')->as('users.')->group(function () {
     Route::post('/register', RegisterController::class)->name('register');
     Route::post('/login', LoginController::class)->name('login');
-    Route::middleware('auth:sanctum')->controller(UserController::class)->group(function () {
+    Route::controller(UserController::class)->group(function () {
         Route::get('/', 'user')->name('current');
+        Route::post('/avatar', 'updateAvatar')->name('update.current-user.avatar');
     });
 });
 
