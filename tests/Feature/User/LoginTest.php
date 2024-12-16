@@ -4,9 +4,6 @@ namespace Tests\Feature\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Arr;
-use Laravel\Sanctum\NewAccessToken;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -26,11 +23,11 @@ class LoginTest extends TestCase
     {
         $response = $this->post(route('users.login'), [
             'email' => $this->user->email,
-            'password' => 'password'
+            'password' => 'password',
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'token'
+            'token',
         ]);
     }
 
@@ -38,11 +35,11 @@ class LoginTest extends TestCase
     {
         $response = $this->post(route('users.login'), [
             'login' => $this->user->login,
-            'password' => 'password'
+            'password' => 'password',
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'token'
+            'token',
         ]);
     }
 
@@ -58,11 +55,11 @@ class LoginTest extends TestCase
         $response->assertJsonStructure([
             'message',
             'errors',
-            'errors' => ['password']
+            'errors' => ['password'],
         ]);
         $response->assertJson([
             'message' => 'The password field is required.',
-            'errors' => ['password' => ['The password field is required.']]
+            'errors' => ['password' => ['The password field is required.']],
         ]);
     }
 }

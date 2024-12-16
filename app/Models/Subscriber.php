@@ -10,10 +10,11 @@ class Subscriber extends Model
 {
     /** @use HasFactory<\Database\Factories\SubscriberFactory> */
     use HasFactory;
+
     use SoftDeletes;
 
     protected $fillable = [
-        'text'
+        'text',
     ];
 
     protected $table = 'subscribers';

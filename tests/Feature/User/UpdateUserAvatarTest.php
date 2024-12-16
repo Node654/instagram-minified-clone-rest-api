@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
@@ -13,7 +11,7 @@ class UpdateUserAvatarTest extends TestCase
     {
         $image = UploadedFile::fake()->image(uniqid().'.png');
         $response = $this->post(route('users.update.current-user.avatar'), [
-            'avatar' => $image
+            'avatar' => $image,
         ]);
 
         $response->assertOk();
@@ -42,12 +40,12 @@ class UpdateUserAvatarTest extends TestCase
     {
         $image = UploadedFile::fake()->image(uniqid().'.gif');
         $response = $this->post(route('users.update.current-user.avatar'), [
-            'avatar' => $image
+            'avatar' => $image,
         ]);
         $response->assertJsonStructure([
             'message',
             'errors',
-            'errors' => ['avatar']
+            'errors' => ['avatar'],
         ]);
         $response->assertJsonValidationErrors(['avatar']);
         $response->assertUnprocessable();
@@ -57,15 +55,14 @@ class UpdateUserAvatarTest extends TestCase
     {
         $image = UploadedFile::fake()->image(uniqid().'.png')->size(1001);
         $response = $this->post(route('users.update.current-user.avatar'), [
-            'avatar' => $image
+            'avatar' => $image,
         ]);
         $response->assertJsonStructure([
             'message',
             'errors',
-            'errors' => ['avatar']
+            'errors' => ['avatar'],
         ]);
         $response->assertJsonValidationErrors(['avatar']);
         $response->assertUnprocessable();
     }
 }
-

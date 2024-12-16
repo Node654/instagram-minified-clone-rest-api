@@ -7,10 +7,8 @@ use App\Http\Resources\User\CurrentUserResource;
 use App\Models\User;
 use App\Services\User\Data\LoginUserData;
 use App\Services\User\Data\RegisterUserData;
-use App\Services\User\Data\UserAvatarData;
+use App\Services\User\Data\UpdateUserData;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
 
 class UserService
 {
@@ -24,25 +22,32 @@ class UserService
      */
     public function login(LoginUserData $data): array
     {
-        if (! auth()->guard('web')->attempt($data->toArray()))
-        {
+        if (! auth()->guard('web')->attempt($data->toArray())) {
             throw new InvalidUserCredentialsException('Invalid credentials user', 401);
         }
 
         $token = auth()->user()->createToken('api_login');
 
         return [
-            'token' => $token->plainTextToken
+            'token' => $token->plainTextToken,
         ];
     }
 
     public function updateAvatar(UploadedFile $image): User
     {
         $path = $image->storePublicly('avatars');
-        $url = config('app.url') . '/storage/' . $path;
+        $url = config('app.url').'/storage/'.$path;
         auth()->user()->update([
-            'avatar' => $url
+            'avatar' => $url,
         ]);
+
+        return auth()->user();
+    }
+
+    public function update(UpdateUserData $data): User
+    {
+        auth()->user()->update($data->toArray());
+
         return auth()->user();
     }
 }

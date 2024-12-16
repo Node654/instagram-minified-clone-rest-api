@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\User;
 
-use App\Services\User\Data\UserAvatarData;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
 
@@ -16,7 +15,7 @@ class UpdateAvatarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => 'required|image|mimes:png,webp|max:1000'
+            'avatar' => 'required|image|mimes:png,webp|max:1000',
         ];
     }
 

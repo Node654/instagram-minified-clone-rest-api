@@ -15,7 +15,5 @@ class LoginUserData extends Data
         public string|Optional $login,
         #[MapInputName('password')]
         public string $password,
-    )
-    {
-    }
+    ) {}
 }

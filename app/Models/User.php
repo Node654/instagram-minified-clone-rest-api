@@ -12,11 +12,12 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    use HasApiTokens;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
-    use HasApiTokens;
 
     protected $table = 'users';
 
@@ -38,7 +39,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'is_verified' => 'boolean'
+        'is_verified' => 'boolean',
     ];
 
     public function posts(): HasMany

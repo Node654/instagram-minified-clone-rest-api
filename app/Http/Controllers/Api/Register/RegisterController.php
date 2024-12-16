@@ -14,4 +14,3 @@ class RegisterController extends Controller
         return User::store($request->userRegisterData());
     }
 }
-

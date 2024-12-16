@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\User;
 
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class GetCurrentUserTest extends TestCase

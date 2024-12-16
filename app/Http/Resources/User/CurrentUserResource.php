@@ -26,7 +26,7 @@ class CurrentUserResource extends JsonResource
             'avatar' => $this->avatar,
             'about' => $this->about,
             'isVerified' => $this->is_verified,
-            'registeredAt' => $this->created_at->format('d-m-Y H:i')
+            'registeredAt' => $this->created_at->format('d-m-Y H:i'),
         ];
     }
 }

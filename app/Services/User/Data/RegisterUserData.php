@@ -19,8 +19,7 @@ class RegisterUserData extends Data
         public ?string $about,
         #[MapInputName('password')]
         public string $password,
-    )
-    {
+    ) {
         $this->password = Hash::make($this->password);
     }
 }

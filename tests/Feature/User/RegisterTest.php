@@ -4,7 +4,6 @@ namespace Tests\Feature\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
@@ -20,7 +19,7 @@ class RegisterTest extends TestCase
             'login' => null,
             'about' => fake()->text,
             'password' => '12345678',
-            'password_confirmation' => '123'
+            'password_confirmation' => '123',
         ];
 
         $response = $this->post(route('users.register'), $data);
@@ -37,7 +36,7 @@ class RegisterTest extends TestCase
             'login' => fake()->unique()->name,
             'about' => fake()->text,
             'password' => '12345678',
-            'password_confirmation' => '12345678'
+            'password_confirmation' => '12345678',
         ];
 
         $response = $this->post(route('users.register'), $data);
