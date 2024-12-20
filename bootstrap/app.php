@@ -15,6 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
+            if ($e->getPrevious() instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+                return responseFailed(getModelNotFoundMessage($e->getPrevious()->getModel()), 404);
+            }
+
             return responseFailed($e->getMessage(), 404);
         });
     })->create();

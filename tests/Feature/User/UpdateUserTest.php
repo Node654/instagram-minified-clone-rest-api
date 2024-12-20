@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
-
     public function test_update_success_user(): void
     {
         $password = fake()->unique()->password;
@@ -68,13 +67,13 @@ class UpdateUserTest extends TestCase
         $response->assertJsonStructure([
             'message',
             'errors',
-            'errors' => ['password']
+            'errors' => ['password'],
         ]);
         $response->assertJson([
             'message' => 'The password field confirmation does not match.',
             'errors' => [
-                'password' => ['The password field confirmation does not match.']
-            ]
+                'password' => ['The password field confirmation does not match.'],
+            ],
         ]);
         $response->assertJsonValidationErrors(['password']);
     }
