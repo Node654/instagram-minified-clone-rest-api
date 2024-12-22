@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class SubscriberFactory extends Factory
 {
     protected $model = Subscriber::class;
+
     /**
      * Define the model's default state.
      *

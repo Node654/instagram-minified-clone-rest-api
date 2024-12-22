@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\SubscribedState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use function PHPUnit\Framework\isNull;
 
 class User extends Authenticatable
 {
@@ -77,5 +79,27 @@ class User extends Authenticatable
     public function isSubscribed(): bool
     {
         return Subscriber::query()->where('user_id', $this->id)->where('subscriber_id', $this->laravel_through_key)->exists();
+    }
+
+    public function subscribe(): string
+    {
+        $subscribe = Subscriber::query()->where([
+            'user_id' => $this->id,
+            'subscriber_id' => auth()->id()
+        ])->first();
+
+        if (is_null($subscribe))
+        {
+            Subscriber::query()->create([
+                'user_id' => $this->id,
+                'subscriber_id' => auth()->id()
+            ]);
+
+            return SubscribedState::Subscribed->value;
+        }
+
+        $subscribe->delete();
+
+        return SubscribedState::Unsubscribed->value;
     }
 }

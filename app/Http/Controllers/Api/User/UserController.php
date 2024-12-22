@@ -6,10 +6,10 @@ use App\Facades\User as UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateAvatarRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Http\Resources\Subscriber\SubscribedResource;
 use App\Http\Resources\User\CurrentUserResource;
 use App\Http\Resources\User\SubscriberResource;
 use App\Http\Resources\User\UserResource;
-use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -38,5 +38,11 @@ class UserController extends Controller
     public function subscribers(User $user)
     {
         return SubscriberResource::collection($user->subscribers);
+    }
+
+    public function subscribe(User $user)
+    {
+        $state = $user->subscribe();
+        return SubscribedResource::make($state);
     }
 }
