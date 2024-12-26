@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use function PHPUnit\Framework\isNull;
 
 class User extends Authenticatable
 {
@@ -85,14 +84,13 @@ class User extends Authenticatable
     {
         $subscribe = Subscriber::query()->where([
             'user_id' => $this->id,
-            'subscriber_id' => auth()->id()
+            'subscriber_id' => auth()->id(),
         ])->first();
 
-        if (is_null($subscribe))
-        {
+        if (is_null($subscribe)) {
             Subscriber::query()->create([
                 'user_id' => $this->id,
-                'subscriber_id' => auth()->id()
+                'subscriber_id' => auth()->id(),
             ]);
 
             return SubscribedState::Subscribed->value;

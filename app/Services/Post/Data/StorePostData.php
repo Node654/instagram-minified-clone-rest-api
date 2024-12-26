@@ -14,7 +14,5 @@ class StorePostData extends Data
         public UploadedFile $photo,
         #[MapInputName('description')]
         public string|Optional $description,
-    )
-    {
-    }
+    ) {}
 }

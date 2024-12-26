@@ -5,13 +5,12 @@ namespace Tests\Feature\User;
 use App\Enums\SubscribedState;
 use App\Models\Subscriber;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class SubscribeUserTest extends TestCase
 {
     private User $subscribedUser;
+
     private User $unsubscribedUser;
 
     protected function setUp(): void
@@ -21,7 +20,7 @@ class SubscribeUserTest extends TestCase
         $this->unsubscribedUser = User::factory()->create();
         Subscriber::factory()->create([
             'user_id' => $this->unsubscribedUser->id,
-            'subscriber_id' => $this->getUserId()
+            'subscriber_id' => $this->getUserId(),
         ]);
     }
 

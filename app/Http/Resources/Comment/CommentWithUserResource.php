@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Subscriber;
+namespace App\Http\Resources\Comment;
 
+use App\Http\Resources\User\MinifiedUserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SubscribedResource extends JsonResource
+class CommentWithUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +16,9 @@ class SubscribedResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'state' => $this->resource,
+            'id' => $this->id,
+            'user' => MinifiedUserResource::make($this->user),
+            'comment' => $this->text,
         ];
     }
 }

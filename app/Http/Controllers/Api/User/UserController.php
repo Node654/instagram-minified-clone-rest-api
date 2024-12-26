@@ -43,6 +43,7 @@ class UserController extends Controller
     public function subscribe(User $user)
     {
         $state = $user->subscribe();
+
         return SubscribedResource::make($state);
     }
 }

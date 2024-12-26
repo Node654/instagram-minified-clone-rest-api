@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Post;
+namespace App\Http\Requests\Comment;
 
-use App\Services\Post\Data\StorePostData;
+use App\Services\Comment\Data\StoreCommentData;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -15,13 +15,12 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'photo' => 'required|image',
-            'description' => 'nullable|string|max:255',
+            'text' => 'required|string|min:1|max:255',
         ];
     }
 
-    public function postData(): StorePostData
+    public function commentData(): StoreCommentData
     {
-        return StorePostData::from($this->validated());
+        return StoreCommentData::from($this->validated());
     }
 }

@@ -21,5 +21,6 @@ function getModelNotFoundMessage(string $model): string
 function uploadedImage(UploadedFile $image): string
 {
     $pathImage = $image->storePublicly('avatars');
-    return config('app.url') . '/storage/' . $pathImage;
+
+    return config('app.url').'/storage/'.$pathImage;
 }
