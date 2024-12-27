@@ -4,6 +4,7 @@ namespace App\Services\Post;
 
 use App\Models\Post;
 use App\Services\Post\Data\StorePostData;
+use App\Services\Post\Data\UpdatePostData;
 
 class PostService
 {
@@ -15,5 +16,12 @@ class PostService
             'photo' => $pathImage,
             'description' => $data->description,
         ]);
+    }
+
+    public function update(UpdatePostData $data, Post $post): Post
+    {
+        $post->update($data->toArray());
+
+        return $post;
     }
 }

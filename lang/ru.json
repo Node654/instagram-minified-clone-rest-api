@@ -1,6 +1,7 @@
 {
     "Bad request": "Плохой запрос!",
     "Invalid credentials user": "Неверный логин или пароль!",
-    "User not found": "Пользователь не найден",
-    "Entity not found": "Элемент не найден"
+    "User not found": "Пользователь не найден!",
+    "Entity not found": "Элемент не найден!",
+    "You dont have access to the current post": "У вас нет доступа к текущему посту!",
 }

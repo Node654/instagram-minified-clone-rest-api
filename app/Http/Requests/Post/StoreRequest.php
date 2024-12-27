@@ -20,7 +20,7 @@ class StoreRequest extends FormRequest
         ];
     }
 
-    public function postData(): StorePostData
+    public function storePostData(): StorePostData
     {
         return StorePostData::from($this->validated());
     }

@@ -65,7 +65,7 @@ class CreatePostTest extends TestCase
     {
         $data = [
             'photo' => null,
-            'description' => fake()->text()
+            'description' => fake()->text(),
         ];
 
         $response = $this->post(route('posts.store'), $data);
@@ -74,15 +74,15 @@ class CreatePostTest extends TestCase
         $response->assertJsonStructure([
             'message',
             'errors' => [
-                'photo'
+                'photo',
             ],
         ]);
         $response->assertJson([
             'message' => 'The photo field is required.',
             'errors' => [
                 'photo' => [
-                    'The photo field is required.'
-                ]
+                    'The photo field is required.',
+                ],
             ],
         ]);
         $response->assertJsonValidationErrors(['photo']);
