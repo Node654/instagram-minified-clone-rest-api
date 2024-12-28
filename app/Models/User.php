@@ -105,4 +105,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Post::class, Subscriber::class, 'subscriber_id', 'user_id', 'id', 'user_id');
     }
+
+    public function totalPosts(): int
+    {
+        return $this->posts()->count();
+    }
 }

@@ -28,7 +28,7 @@ class PostController extends Controller implements HasMiddleware
         ];
     }
 
-    public function index(GetPostsRequest $request)
+    public function index(GetPostsRequest $request): JsonResponse
     {
         return response()->json([
             'posts' => FeedPostResource::collection(PostFacade::feed(
