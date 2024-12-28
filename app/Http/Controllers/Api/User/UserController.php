@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Facades\User as UserFacade;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\User\CheckingWhetherUserCanSubscribeToAnotherUser;
 use App\Http\Requests\User\UpdateAvatarRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\Subscriber\SubscribedResource;
@@ -12,9 +13,18 @@ use App\Http\Resources\User\SubscriberResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware(CheckingWhetherUserCanSubscribeToAnotherUser::class, ['subscribe'])
+        ];
+    }
+
     public function user(): JsonResource
     {
         return new CurrentUserResource(auth()->user());

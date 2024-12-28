@@ -4,10 +4,13 @@ namespace Tests\Feature\Post;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DestroyPostTest extends TestCase
 {
+    use RefreshDatabase;
+
     private Post $post;
 
     private Post $someonePost;
@@ -15,8 +18,8 @@ class DestroyPostTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->post = Post::factory()->create(['user_id' => $this->getUserId()]);
-        $this->someonePost = Post::factory()->for(User::factory())->create();
+        $this->post = Post::factory()->createOne(['user_id' => $this->getUserId()]);
+        $this->someonePost = Post::factory()->for(User::factory())->createOne();
     }
 
     public function test_destroy_post(): void

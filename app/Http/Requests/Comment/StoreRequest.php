@@ -21,6 +21,8 @@ class StoreRequest extends FormRequest
 
     public function commentData(): StoreCommentData
     {
-        return StoreCommentData::from($this->validated());
+        $data = $this->validated();
+        $data['user_id'] = auth()->id();
+        return StoreCommentData::from($data);
     }
 }

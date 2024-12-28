@@ -10,10 +10,6 @@ class CommentService
 {
     public function store(StoreCommentData $data, Post $post): Comment
     {
-        return Comment::query()->create([
-            'user_id' => auth()->id(),
-            'post_id' => $post->id,
-            'text' => $data->text,
-        ]);
+        return $post->comments()->create($data->toArray());
     }
 }

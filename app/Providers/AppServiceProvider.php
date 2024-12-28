@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Resources\Post\FeedPostResource;
 use App\Http\Resources\User\CurrentUserResource;
 use App\Services\Comment\CommentService;
 use App\Services\User\UserService;

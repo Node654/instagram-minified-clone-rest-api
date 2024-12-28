@@ -7,12 +7,14 @@ use App\Facades\Post as PostFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Post\CheckingRightsToDeletePost;
 use App\Http\Requests\Comment\StoreRequest as CommentStoreRequest;
+use App\Http\Requests\Post\GetPostsRequest;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\Comment\CommentResource;
+use App\Http\Resources\Post\FeedPostResource;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -26,9 +28,14 @@ class PostController extends Controller implements HasMiddleware
         ];
     }
 
-    public function index()
+    public function index(GetPostsRequest $request)
     {
-        //
+        return response()->json([
+            'posts' => FeedPostResource::collection(PostFacade::feed(
+                $request->limit(), $request->offset()
+            )),
+            'total' => PostFacade::userTotalFeedPosts(),
+        ]);
     }
 
     public function store(StoreRequest $request): JsonResource
@@ -60,5 +67,12 @@ class PostController extends Controller implements HasMiddleware
         $comment = Comment::store($request->commentData(), $post);
 
         return CommentResource::make($comment);
+    }
+
+    public function addLike(Post $post): JsonResponse
+    {
+        return response()->json([
+            'state' => $post->like()
+        ]);
     }
 }

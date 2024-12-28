@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Like extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'likes';
+
+    protected $fillable = [
+        'post_id',
+        'user_id'
+    ];
 }

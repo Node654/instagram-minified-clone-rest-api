@@ -3,15 +3,15 @@
 namespace Tests\Feature\Post;
 
 use App\Models\Post;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class CreatePostTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
+    use RefreshDatabase;
+
     public function test_success_create_post(): void
     {
         $data = [

@@ -5,11 +5,14 @@ namespace Tests\Feature\Post;
 use App\Http\Resources\Comment\CommentWithUserResource;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class UpdatePostTest extends TestCase
 {
+    use RefreshDatabase;
+
     private Post $post;
 
     private Post $someonePost;
@@ -18,8 +21,8 @@ class UpdatePostTest extends TestCase
     {
         parent::setUp();
 
-        $this->post = Post::factory()->create(['user_id' => $this->getUserId()]);
-        $this->someonePost = Post::factory()->for(User::factory())->create();
+        $this->post = Post::factory()->createOne(['user_id' => $this->getUserId()]);
+        $this->someonePost = Post::factory()->for(User::factory())->createOne();
     }
 
     public function test_update_post(): void

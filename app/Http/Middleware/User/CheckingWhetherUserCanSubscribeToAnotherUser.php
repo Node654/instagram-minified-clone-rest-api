@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Middleware\Post;
+namespace App\Http\Middleware\User;
 
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckingRightsToDeletePost
+class CheckingWhetherUserCanSubscribeToAnotherUser
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,11 @@ class CheckingRightsToDeletePost
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $post = $request->route('post');
-        if ($post->user_id !== auth()->id()) {
-            return responseFailed('You dont have access to the current post', 403);
+        $user = $request->route('user');
+        if ($user->id === auth()->id())
+        {
+            return responseFailed('You cant subscribe to yourself', 403);
         }
-
         return $next($request);
     }
 }

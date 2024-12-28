@@ -4,4 +4,5 @@
     "User not found": "Пользователь не найден!",
     "Entity not found": "Элемент не найден!",
     "You dont have access to the current post": "У вас нет доступа к текущему посту!",
+    "You cant subscribe to yourself": "Вы не можете подписаться на самого себя!"
 }

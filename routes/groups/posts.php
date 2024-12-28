@@ -10,4 +10,5 @@ Route::controller(PostController::class)
     ->as('posts.')
     ->group(function () {
         Route::post('/{post}/comments', 'storeComment')->name('comments-store');
+        Route::post('/{post}/like', 'addLike')->name('like');
     });
